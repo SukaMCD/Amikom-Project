@@ -24,15 +24,23 @@ class AuthorController extends Controller
      */
     public function create()
     {
-        return "create";
+        return view("author._form", [
+            "author" => new author(),
+            "action" => route ("author.store"),
+            "method" => "POST",
+        ]);
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(Request $request) 
     {
-        
+        $author = new author();
+        $author->name = $request->name;
+        $author->save();
+
+        return redirect(route("author.index"));
     }
 
     /**
@@ -48,7 +56,11 @@ class AuthorController extends Controller
      */
     public function edit(author $author)
     {
-        return ($author);
+        return view("author._form", [
+            "author" => $author,
+            "action" => route ("author.update", $author->id),
+            "method" => "PUT",
+        ]);
     }
 
     /**
@@ -56,7 +68,9 @@ class AuthorController extends Controller
      */
     public function update(Request $request, author $author)
     {
-        //
+        $author->name = $request->name;
+        $author->save();
+        return redirect(route("author.index"));
     }
 
     /**

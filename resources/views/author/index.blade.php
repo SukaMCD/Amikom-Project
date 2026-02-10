@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.rtl.min.css"
         integrity="sha384-CfCrinSRH2IR6a4e6fy2q6ioOX7O6Mtm1L9vRvFZ1trBncWmMePhzvafv7oIcWiW" crossorigin="anonymous">
 
-    <title>Hello World!</title>
+    <title>Perpustakaan</title>
 </head>
 
 <body>
@@ -60,7 +60,7 @@
                             <th scope="author">{{ $i + 1 }}</th>
                             <td>{{ $author->name }}</td>
                             <td>
-                                <a href="{{ route('author.edit', $author->id) }}" class="btn btn-primary mb-3">Edit</a>
+                                <a href="{{ route('author.edit', $author->id) }}" class="btn btn-success mb-3">Edit</a>
                             </td>
                         </tr>
                     @endforeach
