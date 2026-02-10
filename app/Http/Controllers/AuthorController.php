@@ -26,7 +26,7 @@ class AuthorController extends Controller
     {
         return view("author._form", [
             "author" => new author(),
-            "action" => route ("author.store"),
+            "action" => route("author.store"),
             "method" => "POST",
         ]);
     }
@@ -34,13 +34,17 @@ class AuthorController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request) 
+    public function store(Request $request)
     {
+        $validated = $request->validate([
+            'name' => 'required|string|min:3',
+        ]);
+
         $author = new author();
         $author->name = $request->name;
         $author->save();
 
-        return redirect(route("author.index"));
+        return redirect(route("author.index"))->with("success", "Author created successfully.");
     }
 
     /**
@@ -58,7 +62,7 @@ class AuthorController extends Controller
     {
         return view("author._form", [
             "author" => $author,
-            "action" => route ("author.update", $author->id),
+            "action" => route("author.update", $author->id),
             "method" => "PUT",
         ]);
     }
@@ -68,9 +72,13 @@ class AuthorController extends Controller
      */
     public function update(Request $request, author $author)
     {
+        $validated = $request->validate([
+            'name' => 'required|string|min:3',
+        ]);
+
         $author->name = $request->name;
         $author->save();
-        return redirect(route("author.index"));
+        return redirect(route("author.index"))->with("success", "Author updated successfully.");
     }
 
     /**
@@ -78,6 +86,7 @@ class AuthorController extends Controller
      */
     public function destroy(author $author)
     {
-        //
+        $author->delete();
+        return redirect(route("author.index"))->with("success", "Author deleted successfully.");
     }
 }
