@@ -84,7 +84,7 @@ class BookController extends Controller
             'description' => 'nullable|string',
         ]);
 
-        Book::where('id', $book->id)->update($validated);
+        $book->update($validated);
         return redirect(route("book.index"))->with("success", "Book updated successfully.");
     }
 

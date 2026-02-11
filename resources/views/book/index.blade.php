@@ -8,7 +8,7 @@
                     <h3>List Books</h3>
                     <a href="{{ route('book.create') }}" class="btn btn-primary mb-3">Add book</a>
                 </div>
-                <table class="table">
+                <table class="table mt-2" id="myTable">
                     <thead>
                         <tr>
                             <th scope="col">No</th>

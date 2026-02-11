@@ -5,8 +5,8 @@
         <section>
             <div class="container mt-4">
                 <div class="d-flex justify-content-between">
-                    <h3>List Author</h3>
-                    <a href="{{ route('author.create') }}" class="btn btn-primary mb-3">Add Author</a>
+                    <h3>List Publisher</h3>
+                    <a href="{{ route('publisher.create') }}" class="btn btn-primary mb-3">Add Publisher</a>
                 </div>
                 <table class="table mt-2" id="myTable">
                     <thead>
@@ -17,15 +17,15 @@
                         </tr>
                     </thead>
                     <tbody class="table-group-divider">
-                        @foreach ($author as $i => $author)
+                        @foreach ($publisher as $i => $publisher)
                             <tr>
-                                <th scope="author">{{ $i + 1 }}</th>
-                                <td>{{ $author->name }}</td>
+                                <th scope="publisher">{{ $i + 1 }}</th>
+                                <td>{{ $publisher->name }}</td>
                                 <td>
-                                    <a href="{{ route('author.edit', $author->id) }}" class="btn btn-success mb-3">Edit</a>
-                                    <form action="{{ route('author.destroy', $author->id) }}" method="POST"
+                                    <a href="{{ route('publisher.edit', $publisher->id) }}" class="btn btn-success mb-3">Edit</a>
+                                    <form action="{{ route('publisher.destroy', $publisher->id) }}" method="POST"
                                         class="d-inline"
-                                        onsubmit="return confirm('Are you sure you want to delete this author?');">
+                                        onsubmit="return confirm('Are you sure you want to delete this publisher?');">
                                         @csrf
                                         @method('DELETE')
                                         <button type="submit" class="btn btn-danger mb-3">Delete</button>

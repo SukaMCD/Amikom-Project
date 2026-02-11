@@ -12,7 +12,11 @@ class PublisherController extends Controller
      */
     public function index()
     {
-        //
+        $publisher = publisher::all();
+
+        return view("publisher.index", [
+            "publisher" => $publisher
+        ]);
     }
 
     /**
@@ -20,7 +24,11 @@ class PublisherController extends Controller
      */
     public function create()
     {
-        //
+        return view("publisher._form", [
+            "publisher" => new publisher(),
+            "action" => route("publisher.store"),
+            "method" => "POST",
+        ]);
     }
 
     /**
@@ -28,7 +36,14 @@ class PublisherController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validated = $request->validate([
+            'name' => 'required|string|min:3',
+        ]);
+
+        $publisher = new publisher();
+        $publisher->name = $request->name;
+        $publisher->save();
+        return redirect(route("publisher.index"))->with("success", "publisher created successfully.");
     }
 
     /**
@@ -44,7 +59,11 @@ class PublisherController extends Controller
      */
     public function edit(publisher $publisher)
     {
-        //
+        return view("publisher._form", [
+            "publisher" => $publisher,
+            "action" => route("publisher.update", $publisher->id),
+            "method" => "PUT",
+        ]);
     }
 
     /**
@@ -52,7 +71,13 @@ class PublisherController extends Controller
      */
     public function update(Request $request, publisher $publisher)
     {
-        //
+        $validated = $request->validate([
+            'name' => 'required|string|min:3',
+        ]);
+
+        $publisher->name = $request->name;
+        $publisher->save();
+        return redirect(route("publisher.index"))->with("success", "publisher updated successfully.");
     }
 
     /**
@@ -60,6 +85,7 @@ class PublisherController extends Controller
      */
     public function destroy(publisher $publisher)
     {
-        //
+        $publisher->delete();
+        return redirect(route("publisher.index"))->with("success", "publisher deleted successfully.");
     }
 }

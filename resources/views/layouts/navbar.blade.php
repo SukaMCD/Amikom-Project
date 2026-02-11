@@ -15,7 +15,8 @@
                         href="{{ route('author.index') }}">Author</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Publisher</a>
+                    <a class="nav-link {{ Request::is('publisher') ? 'active' : '' }}"
+                        href="{{ route('publisher.index') }}">Publisher</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link {{ Request::is('book') ? 'active' : '' }}"
