@@ -37,6 +37,22 @@
                 </div>
                 <!-- end author -->
 
+                <!-- start publisher -->
+                <div class="col-6 mb-2 form-group">
+                    <label for="publisher_id">Publisher</label>
+                    <select name="publisher_id" id="publisher_id" class="form-control">
+                        <option value="">Select Publisher</option>
+                        @foreach ($publishers as $publisher)
+                            <option value="{{ $publisher->id }}" {{ old('publisher_id', $book->publisher_id) == $publisher->id ? 'selected' : '' }}>
+                                {{ $publisher->name }}</option>
+                        @endforeach
+                    </select>
+                    @error('publisher_id')
+                        <span class="text-danger">{{ $message }}</span>
+                    @enderror
+                </div>
+                <!-- end publisher -->
+
                 <!-- start date of publish -->
                 <div class="col-6 mb-2 form-group">
                     <label for="date_of_publish">Date Of Publish</label>

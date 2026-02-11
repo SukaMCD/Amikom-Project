@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\book;
 use Illuminate\Http\Request;
 use App\Models\author;
+use App\Models\publisher;
 
 class BookController extends Controller
 {
@@ -13,7 +14,7 @@ class BookController extends Controller
      */
     public function index()
     {
-        $book = Book::all()->load("author");
+        $book = Book::with(['author', 'publisher'])->get();
 
         return view("book.index", [
             "book" => $book
@@ -29,7 +30,8 @@ class BookController extends Controller
             "book" => new book(),
             "action" => route("book.store"),
             "method" => "POST",
-            "authors" => author::all()
+            "authors" => author::all(),
+            "publishers" => publisher::all()
         ]);
     }
 
@@ -41,6 +43,7 @@ class BookController extends Controller
         $validated = $request->validate([
             'title' => 'required|string|min:3',
             'author_id' => 'required|exists:authors,id',
+            'publisher_id' => 'required|exists:publishers,id',
             'date_of_publish' => 'required|date',
             'total_page' => 'required|integer|min:1',
             'description' => 'nullable|string',
@@ -67,7 +70,8 @@ class BookController extends Controller
             "book" => $book,
             "action" => route("book.update", $book->id),
             "method" => "PUT",
-            "authors" => author::all()
+            "authors" => author::all(),
+            "publishers" => publisher::all()
         ]);
             }
 
@@ -79,6 +83,7 @@ class BookController extends Controller
         $validated = $request->validate([
             'title' => 'required|string|min:3',
             'author_id' => 'required|exists:authors,id',
+            'publisher_id' => 'required|exists:publishers,id',
             'date_of_publish' => 'required|date',
             'total_page' => 'required|integer|min:1',
             'description' => 'nullable|string',

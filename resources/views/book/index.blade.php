@@ -14,6 +14,7 @@
                             <th scope="col">No</th>
                             <th scope="col">Title</th>
                             <th scope="col">Author</th>
+                            <th scope="col">Publisher</th>
                             <th scope="col">Date Of Publish</th>
                             <th scope="col">Total Pages</th>
                             <th scope="col">Actions</th>
@@ -25,6 +26,7 @@
                                 <th scope="book">{{ $i + 1 }}</th>
                                 <td>{{ $book->title }}</td>
                                 <td>{{ $book->author?->name }}</td>
+                                <td>{{ $book->publisher?->name }}</td>
                                 <td>{{ $book->date_of_publish }}</td>
                                 <td>{{ $book->total_page }}</td>
                                 <td>
