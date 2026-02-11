@@ -4,8 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
-{
+return new class extends Migration {
     /**
      * Run the migrations.
      */
@@ -13,12 +12,17 @@ return new class extends Migration
     {
         Schema::create('books', function (Blueprint $table) {
             $table->id();
-            $table->integer('total_page');
+            $table->string('title');
+            $table->unsignedBigInteger('author_id');
+            $table->foreign('author_id')
+                ->references('id')
+                ->on('authors')
+                ->onDelete('cascade');
             $table->date('date_of_publish');
-            $table->foreignId('publisher_id')->constrained()->cascadeOnDelete();
-            $table->foreignId('author_id')->constrained()->cascadeOnDelete();
-            $table->text('deskripsi');
+            $table->integer('total_page');
+            $table->text('description')->nullable();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

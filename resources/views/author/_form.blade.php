@@ -10,7 +10,7 @@
             @endif
 
             <div class="row">
-                <div class="col-6 form-group">
+                <div class="col-6 mb-2 form-group">
                     <label for="name">Name Of Author</label>
                     <input type="text" class="form-control" name="name" id="name"
                         value="{{ $author->name ?? old('name') }}">
